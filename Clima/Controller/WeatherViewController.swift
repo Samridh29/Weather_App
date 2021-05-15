@@ -76,6 +76,10 @@ extension WeatherViewController: WeatherManagerDelegate, AVSpeechSynthesizerDele
     }
     func didEncounterError(_ error: Error) {
         print(error)
+        DispatchQueue.main.async {
+            self.citySearch.placeholder="Enter a proper city name"
+
+        }
     }
 }
 //MARK: - LocationManagerDelegate
@@ -89,6 +93,7 @@ extension WeatherViewController:CLLocationManagerDelegate{
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+        citySearch.placeholder="Enter a proper city name"
     }
 }
 
