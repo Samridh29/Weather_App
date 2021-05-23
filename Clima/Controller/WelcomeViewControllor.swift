@@ -15,6 +15,7 @@ class WelcomeViewController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden=true
     }
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
