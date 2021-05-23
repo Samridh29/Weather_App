@@ -1,6 +1,7 @@
 import UIKit
 import CoreLocation
 import AVFoundation
+import Firebase
 
 class WeatherViewController: UIViewController{
     
@@ -20,7 +21,7 @@ class WeatherViewController: UIViewController{
         locationManager.delegate=self
         weatherManager.delegate=self
         citySearch.delegate = self
-        
+        synthesizer.delegate=self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }
@@ -28,6 +29,19 @@ class WeatherViewController: UIViewController{
     @IBAction func relocateButton(_ sender: UIButton) {
         locationManager.requestLocation()
     }
+    
+    @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
+        
+        do {
+            try Auth.auth().signOut()
+            navigationController?.popToRootViewController(animated: true)
+        }
+        catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+    }
+    
 }
 //MARK: - UITextFieldDelegate
 extension WeatherViewController: UITextFieldDelegate{
@@ -76,6 +90,10 @@ extension WeatherViewController: WeatherManagerDelegate, AVSpeechSynthesizerDele
     }
     func didEncounterError(_ error: Error) {
         print(error)
+        DispatchQueue.main.async {
+            self.citySearch.placeholder="Enter a proper city name"
+
+        }
     }
 }
 //MARK: - LocationManagerDelegate
@@ -89,6 +107,7 @@ extension WeatherViewController:CLLocationManagerDelegate{
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+        citySearch.placeholder="Enter a proper city name"
     }
 }
 
