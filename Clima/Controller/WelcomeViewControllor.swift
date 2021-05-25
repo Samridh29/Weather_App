@@ -51,10 +51,7 @@ class WelcomeViewController:UIViewController{
         
     }
     
-<<<<<<< HEAD
-=======
 
->>>>>>> 49172035713f63c499a2bd22c3c79d49d087c742
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "LoginToApp"){
             let WeatherVC=segue.destination as! WeatherViewController
