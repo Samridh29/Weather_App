@@ -2,6 +2,7 @@ import UIKit
 import CoreLocation
 import AVFoundation
 import Firebase
+import GoogleSignIn
 
 class WeatherViewController: UIViewController{
     

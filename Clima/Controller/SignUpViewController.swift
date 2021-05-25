@@ -1,10 +1,4 @@
-//
-//  SignUpViewController.swift
-//  Clima
-//
-//  Created by Samridh Agarwal on 23/05/21.
-//  Copyright © 2021 App Brewery. All rights reserved.
-//
+
 
 import UIKit
 import Firebase
@@ -13,9 +7,11 @@ class SignUpViewController:UIViewController{
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner.hidesWhenStopped=true
     }
     
     @IBAction func signupPressed(_ sender: UIButton) {
@@ -27,6 +23,7 @@ class SignUpViewController:UIViewController{
                 }
                 else{
                     self.performSegue(withIdentifier: "SignupApp", sender: self)
+                    self.spinner.startAnimating()
                 }
             }
         }
@@ -43,6 +40,7 @@ class SignUpViewController:UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "SignupApp"){
             let WeatherVC = segue.destination as! WeatherViewController
+            spinner.stopAnimating()
         }
     }
 }
